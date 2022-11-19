@@ -1,0 +1,22 @@
+{
+    "books": [
+        {
+            "id": 1,
+            "title": "PHP for Beginners",
+            "description": "if you're a beginner here's a good book to learn php for free",
+            "price": 300
+        },
+        {
+            "id": 2,
+            "title": "React for Beginners",
+            "description": "if you're a beginner here's a good book to learn react for free",
+            "price": 200
+        },
+        {
+            "id": 3,
+            "title": "C++ for Beginners",
+            "description": "if you're a beginner here's a good book to learn c++ for free",
+            "price": 350
+        }
+    ]
+}
