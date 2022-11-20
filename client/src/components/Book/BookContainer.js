@@ -7,7 +7,7 @@ import './book.css';
 
 const PostContainer = () => {
     const [selectedBook, setSelectedBook] = useState({})
-    const { isLoading, books, book } = useSelector(state => state.books);
+    const { isLoading, books } = useSelector(state => state.books);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -17,7 +17,7 @@ const PostContainer = () => {
     const getBookId = (book) => {
         //dispatch(getBook(book)).then((data) => { console.log(data) });
         const selectedBook = books.find((item) => item.id === book.id)
-        setSelectedBook(selectedBook);
+        setSelectedBook((prev) => { return { ...prev, ...selectedBook } });
 
 
     }
