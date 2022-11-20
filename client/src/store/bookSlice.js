@@ -5,6 +5,7 @@ export const getBooks = createAsyncThunk('book/getBooks', async (args, thunkAPI)
         //dispatch({type:book/getBooks/pending},payload:undefined)
         const resp = await fetch('http://localhost:3009/books');
         const data = await resp.json();
+
         return data;
         //dispatch({type:book/getBooks/fullfilled},payload:data)
     }

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addBook } from "../store/bookSlice";
 const Addform = () => {
+  const { user, isLoggedIn } = useSelector((state) => state.auth);
   const [formErrors, setFormErrors] = useState([]);
+  console.log(user);
   const dispatch = useDispatch();
   const [inputs, setInputs] = useState({
     title: "",
@@ -11,7 +13,6 @@ const Addform = () => {
   });
   const handleInputs = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-    console.log(inputs);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -84,6 +85,7 @@ const Addform = () => {
             type="submit"
             className="btn btn-primary"
             onClick={handleSubmit}
+            disabled={!isLoggedIn}
           >
             Submit
           </button>
