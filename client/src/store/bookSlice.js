@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
+import { logInsert } from "./reportSlice";
 export const getBooks = createAsyncThunk('book/getBooks', async (args, thunkAPI) => {
     const { rejectWithValue } = thunkAPI
     try {
@@ -15,7 +16,7 @@ export const getBooks = createAsyncThunk('book/getBooks', async (args, thunkAPI)
     }
 });
 export const addBook = createAsyncThunk('book/addBook', async (bookData, thunkAPI) => {
-    const { rejectWithValue } = thunkAPI
+    const { rejectWithValue, dispatch } = thunkAPI
     try {
         const resp = await fetch('http://localhost:3009/books', {
             method: 'POST',
@@ -25,6 +26,7 @@ export const addBook = createAsyncThunk('book/addBook', async (bookData, thunkAP
             },
         });
         const data = await resp.json();
+        dispatch(logInsert({ name: 'insertBook', status: 'success' }))
         return data;
     } catch (err) {
         return rejectWithValue(err.message);
