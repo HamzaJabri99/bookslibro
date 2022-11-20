@@ -6,7 +6,7 @@ import { getBooks, getBook } from '../../store/bookSlice';
 import './book.css';
 
 const PostContainer = () => {
-    const [selectedBook, setSelectedBook] = useState({})
+    const [selectedBook, setSelectedBook] = useState(null)
     const { isLoading, books } = useSelector(state => state.books);
     const dispatch = useDispatch();
 
