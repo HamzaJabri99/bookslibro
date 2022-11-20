@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 export const getBooks = createAsyncThunk('book/getBooks', async (args, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI
     try {
         //dispatch({type:book/getBooks/pending},payload:undefined)
         const resp = await fetch('http://localhost:3009/books');
@@ -8,17 +9,17 @@ export const getBooks = createAsyncThunk('book/getBooks', async (args, thunkAPI)
         //dispatch({type:book/getBooks/fullfilled},payload:data)
     }
     catch (err) {
-        return err;
+        return rejectWithValue(err.message);
         //dispatch({type:book/getBooks/rejected},payload:err)
     }
 });
 const bookSlice = createSlice({
     name: 'book',
-    initialState: { books: null, isLoading: false },
+    initialState: { books: [], isLoading: false, error: false },
     extraReducers: {
         [getBooks.pending]: (state, action) => {
             state.isLoading = true;
-
+            state.error = false;
         },
         [getBooks.fulfilled]: (state, action) => {
             state.isLoading = false;
@@ -26,7 +27,7 @@ const bookSlice = createSlice({
         },
         [getBooks.rejected]: (state, action) => {
             state.isLoading = false;
-            console.log(action)
+            state.error = true;
         }
     }
 })
